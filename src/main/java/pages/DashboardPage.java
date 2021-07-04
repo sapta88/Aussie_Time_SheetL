@@ -22,6 +22,8 @@ public class DashboardPage extends PageUtility {
 	WebElement eMoreInfoLink;
 	@FindBy(xpath = "//p[text()='In Progress Task']/following-sibling::*/a")
 	WebElement eMoreInfoLinkPT;
+	@FindBy(xpath = "//p[text()='In Progress Task']/following-sibling::*/a")
+	WebElement eMoreInfoLinkPTtrial;
 	@FindBy(xpath = "//a[@href='#tasks']")
 	WebElement eOverdueTask;
 	@FindBy(xpath = "//*[@id=\"datatable_action\"]/tbody/tr[1]/td[4]/a")
