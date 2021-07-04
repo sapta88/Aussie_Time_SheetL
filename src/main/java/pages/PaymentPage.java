@@ -33,9 +33,9 @@ public class PaymentPage extends PageUtility {
 	}
 	public void paymentPageVerification()
 	{
-		String expectedTitle = "Payments Received";
-		String actualTitle = ePaymentReceivedPageVerification.getText();
-		sa.assertEquals(actualTitle, expectedTitle);
+		String expectedText = "Payments Received";
+		String actualText = ePaymentReceivedPageVerification.getText();
+		sa.assertEquals(actualText, expectedText);
 		sa.assertAll();
 	}
 
