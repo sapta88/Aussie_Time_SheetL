@@ -111,9 +111,9 @@ public class UserPage extends PageUtility {
 	public void profileUpdateVerify()
 	{
 		waitToVisible(eProfileUpdateVerify);
-		String actualMsg = eProfileUpdateVerify.getText();
-		String expectedMsg = "Profile Information Successfully Updated!";
-		sa.assertEquals(actualMsg, expectedMsg);
+		String actualVMsg = eProfileUpdateVerify.getText();
+		String expectedVMsg = "Profile Information Successfully Updated!";
+		sa.assertEquals(actualVMsg, expectedVMsg);
 		sa.assertAll();
 	}
 	public void emailUpdateVerify()
