@@ -98,9 +98,9 @@ public class ProjectPage extends PageUtility {
 	public void clientVerify()
 	{
 		waitToVisible(eAddClientVerify);
-		String actualMsg = eAddClientVerify.getText();
-		String expectedMsg = "Client updated successfully!";
-		sa.assertEquals(actualMsg, expectedMsg);
+		String actualVMsg = eAddClientVerify.getText();
+		String expectedVMsg = "Client updated successfully!";
+		sa.assertEquals(actualVMsg, expectedVMsg);
 		sa.assertAll();
 	}
 }
