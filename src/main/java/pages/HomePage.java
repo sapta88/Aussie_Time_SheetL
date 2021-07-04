@@ -14,6 +14,8 @@ public class HomePage extends PageUtility {
 	WebElement eSearchBox;
 	@FindBy(xpath = "//*[@title='Mailbox']")
 	WebElement eMailBox;
+	@FindBy(xpath = "//*[@title='Mailbox']")
+	WebElement eMailBoxT;
 	SoftAssert sa;
 
 	public HomePage(WebDriver driver) {
