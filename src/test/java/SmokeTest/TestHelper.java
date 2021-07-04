@@ -50,7 +50,7 @@ public class TestHelper
 	  public void beforeClass() 
 	  {
 		  System.setProperty("webdriver.chrome.driver",
-					"C:\\Users\\sapta\\eclipse-workspace\\AussieTimeSheet\\drivers\\chromedriver.exe");
+					"C:\\Users\\sapta\\git\\Aussie_Time_SheetL\\drivers\\chromedriver.exe");
 		  driver=new ChromeDriver();
 		  driver.get("http://buffalocart.com/demo/erp/login");
 		  objLogPage=new LoginPage(driver);

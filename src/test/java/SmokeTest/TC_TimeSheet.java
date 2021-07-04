@@ -29,6 +29,7 @@ public class TC_TimeSheet extends TestHelper {
 
 	}
 
+
 	@Test(priority = 1, description = "Draft the Mail And File attachment")
 	public void tc_3_5DraftMailAndFileAttach() throws Exception {
 		objLogPage.waitForVisibility();
@@ -63,7 +64,7 @@ public class TC_TimeSheet extends TestHelper {
 
 	}
 
-	 @Test(priority = 2, description = "Announcement Details")
+	@Test(priority = 2, description = "Announcement Details")
 	public void tc_6AnnouncementDetails() throws Exception {
 		objLogPage.waitForVisibility();
 		objLogPage.enterUsername(excel.ReadData("username"));
@@ -76,7 +77,7 @@ public class TC_TimeSheet extends TestHelper {
 
 	}
 
-	 @Test(priority = 3, description = "Dashboard payment received page")
+	@Test(priority = 3, description = "Dashboard payment received page")
 	public void tc_7PaymentPage() throws Exception {
 		objLogPage.waitForVisibility();
 		objLogPage.enterUsername(excel.ReadData("username"));
@@ -121,7 +122,7 @@ public class TC_TimeSheet extends TestHelper {
 
 	}
 
-	 @Test(priority = 7, description = "Task Page-New Task Creation")
+	@Test(priority = 7, description = "Task Page-New Task Creation")
 	public void tc_11_12NewTask() throws Exception {
 		objLogPage.waitForVisibility();
 		objLogPage.enterUsername(excel.ReadData("username"));
@@ -199,7 +200,7 @@ public class TC_TimeSheet extends TestHelper {
 
 	@Test(priority = 10, description = "Edit Tasks and Export report")
 	public void tc_16_17TaskEdition() throws Exception {
-		 objLogPage.waitForVisibility();
+		objLogPage.waitForVisibility();
 		objLogPage.enterUsername(excel.ReadData("username"));
 		objLogPage.enterPassword(excel.ReadData("password"));
 		objLogPage.signIn();
@@ -233,9 +234,9 @@ public class TC_TimeSheet extends TestHelper {
 
 	}
 
-	 @Test(priority = 11, description = "Back up database")
+	@Test(priority = 11, description = "Back up database")
 	public void tc_18VBackUpDatabase() throws Exception {
-		 objLogPage.waitForVisibility();
+		objLogPage.waitForVisibility();
 		objLogPage.enterUsername(excel.ReadData("username"));
 		objLogPage.enterPassword(excel.ReadData("password"));
 		objLogPage.signIn();
@@ -287,7 +288,7 @@ public class TC_TimeSheet extends TestHelper {
 
 	@Test(priority = 14, description = "Update the Bug status")
 	public void tc_23UpdateBugStatus() throws Exception {
-		 objLogPage.waitForVisibility();
+		objLogPage.waitForVisibility();
 		objLogPage.enterUsername(excel.ReadData("username"));
 		objLogPage.enterPassword(excel.ReadData("password"));
 		objLogPage.signIn();
@@ -312,7 +313,6 @@ public class TC_TimeSheet extends TestHelper {
 		objBugPage.clearSearchBoxResult();
 		objBugPage.searchBox("Drag and Drop");
 		objBugPage.statusUpdateVerify();
-		
 
 	}
 
@@ -344,13 +344,12 @@ public class TC_TimeSheet extends TestHelper {
 		objProjectPage.shortNote("abc");
 		objProjectPage.save();
 		objProjectPage.clientVerify();
-		
 
 	}
 
-	 @Test(priority = 17, description = "View User details")
+	@Test(priority = 17, description = "View User details")
 	public void tc_26VerifyMyDetails() throws Exception {
-		 objLogPage.waitForVisibility();
+		objLogPage.waitForVisibility();
 		objLogPage.enterUsername(excel.ReadData("username"));
 		objLogPage.enterPassword(excel.ReadData("password"));
 		objLogPage.signIn();
@@ -360,9 +359,9 @@ public class TC_TimeSheet extends TestHelper {
 		objUserPage.scrollDown();
 	}
 
-	 @Test(priority = 18, description = "Update Profile")
+	@Test(priority = 18, description = "Update Profile")
 	public void tc_27UpdateProfile() throws Exception {
-		 objLogPage.waitForVisibility();
+		objLogPage.waitForVisibility();
 		objLogPage.enterUsername(excel.ReadData("username"));
 		objLogPage.enterPassword(excel.ReadData("password"));
 		objLogPage.signIn();
@@ -371,12 +370,11 @@ public class TC_TimeSheet extends TestHelper {
 		objUserPage.updateDetails();
 		objUserPage.scrollDown();
 
-
 	}
 
-	 @Test(priority = 18, description = "Update User Email details",dataProvider="ReadFromExcel")
-	public void tc_27UpdateEmailSDetails(String newPassword,String newEmail) throws Exception {
-		 objLogPage.waitForVisibility();
+	@Test(priority = 18, description = "Update User Email details", dataProvider = "ReadFromExcel")
+	public void tc_27UpdateEmailSDetails(String newPassword, String newEmail) throws Exception {
+		objLogPage.waitForVisibility();
 		objLogPage.enterUsername(excel.ReadData("username"));
 		objLogPage.enterPassword(excel.ReadData("password"));
 		objLogPage.signIn();
@@ -392,7 +390,7 @@ public class TC_TimeSheet extends TestHelper {
 
 	@Test(priority = 19, description = "Update User details")
 	public void tc_28updateUserDetails() throws Exception {
-		 objLogPage.waitForVisibility();
+		objLogPage.waitForVisibility();
 		objLogPage.enterUsername(excel.ReadData("username"));
 		objLogPage.enterPassword(excel.ReadData("password"));
 		objLogPage.signIn();
@@ -404,7 +402,7 @@ public class TC_TimeSheet extends TestHelper {
 		objUserPage.profileUpdateVerify();
 	}
 
-@Test(priority = 20, description = "Update company details")
+	@Test(priority = 20, description = "Update company details")
 	public void tc_29UpdateCompanyDetails() throws Exception {
 		objLogPage.waitForVisibility();
 		objLogPage.enterUsername(excel.ReadData("username"));
@@ -427,7 +425,6 @@ public class TC_TimeSheet extends TestHelper {
 		objUserPage.imageIcon();
 		objDashBoard.activities();
 		objDashBoard.activitiesViewVerify();
-		
 
 	}
 }
