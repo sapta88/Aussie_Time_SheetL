@@ -21,6 +21,8 @@ public class LoginPage extends PageUtility {
 	WebElement eGetNewAccount;
 	@FindBy(xpath = "//input[@type='text']")
 	WebElement eCompanyName;
+	@FindBy(xpath = "//input[@type='text']")
+	WebElement eCompanyNameTrial;
 	@FindBy(xpath="//a[text()='Dashboard']")
 	WebElement eDashBoard;
 	@FindBy(xpath="//input[@id='s-menu']")
