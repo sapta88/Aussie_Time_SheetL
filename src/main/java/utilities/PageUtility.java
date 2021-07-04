@@ -71,7 +71,7 @@ public class PageUtility {
 	public void waitForAlertPresent() {
 		wait.until(ExpectedConditions.alertIsPresent());
 	}
-	// *****************************************wait*********************************************
+	// *****************************************waitfor*********************************************
 	public void waitForLong() throws InterruptedException {
 		Thread.sleep(3000);
 	}
