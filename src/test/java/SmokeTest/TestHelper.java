@@ -77,7 +77,7 @@ public class TestHelper
 	  @DataProvider(name = "ReadFromExcel")
 		public Object[][] readData() throws IOException {
 			FileInputStream fls = new FileInputStream(
-					"C:\\Users\\sapta\\git\\Aussie_Time_SheetL\\src\\test\\resources\\TestData.xlsx");
+					"C:\\Users\\sapta\\git\\Aussie_Time_SheetL\\src\\test\\resources\\TestDataL.xlsx");
 			XSSFWorkbook book = new XSSFWorkbook(fls);
 			XSSFSheet sheet = book.getSheet("Sheet2");
 			XSSFRow row = sheet.getRow(0);
