@@ -48,9 +48,9 @@ public class SettingsPage extends PageUtility
 	public void saveVerify()
 	{
 	waitToVisible(eSaveVerify);
-	String actualMsg = eSaveVerify.getText();
-	String expectedMsg = "Genaral Settings Information Successfully Updated !";
-	sa.assertEquals(actualMsg, expectedMsg);
+	String actualVMsg = eSaveVerify.getText();
+	String expectedVMsg = "Genaral Settings Information Successfully Updated !";
+	sa.assertEquals(actualVMsg, expectedVMsg);
 	sa.assertAll();
 	}
 }
