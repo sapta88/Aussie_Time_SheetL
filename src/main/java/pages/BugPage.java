@@ -70,6 +70,8 @@ public class BugPage extends PageUtility {
 	WebElement eUnConfrimed;
 	@FindBy(xpath = "//a[text()='Opportunity Details']")
 	WebElement eSaveVerify;
+	@FindBy(xpath = "//a[text()='Opportunity Details']")
+	WebElement eSaveVerifytrial;
 	@FindBy(xpath = "//div[@id='toast-container']/div")
 	WebElement eUpdateMsgVerify;
 	@FindBy(xpath = "//tbody/tr[8]/td[3]/span")
