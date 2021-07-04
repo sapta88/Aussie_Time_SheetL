@@ -359,7 +359,7 @@ public class TC_TimeSheet extends TestHelper {
 		objUserPage.scrollDown();
 	}
 
-	@Test(priority = 18, description = "Update Profile")
+	@Test(priority = 18, description = "Update User Profile")
 	public void tc_27UpdateProfile() throws Exception {
 		objLogPage.waitForVisibility();
 		objLogPage.enterUsername(excel.ReadData("username"));
