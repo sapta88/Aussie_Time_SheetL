@@ -33,6 +33,8 @@ public class DraftMailPage extends PageUtility {
 	WebElement eToSubjectList;
 	@FindBy(xpath = "//*[@class='form-control']")
 	WebElement eSubject;
+	@FindBy(xpath = "//*[@class='form-control']")
+	WebElement eSubjecttrail;
 	@FindBy(xpath = "//*[@contenteditable='true']")
 	WebElement eMesgBody;
 	@FindBy(xpath = "//button[@name='draf']")
