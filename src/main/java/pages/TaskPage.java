@@ -339,9 +339,9 @@ public class TaskPage extends PageUtility {
 	public void hourRateVerify()
 	{
 		waitToVisible(eViewEditHourRate);
-		String actualMsg=eViewEditHourRate.getText();
-		String expectedMsg="8.00";
-		sa.assertEquals(actualMsg, expectedMsg);
+		String actualValue=eViewEditHourRate.getText();
+		String expectedValue="8.00";
+		sa.assertEquals(actualValue, expectedValue);
 		sa.assertAll();
 	}
 	
