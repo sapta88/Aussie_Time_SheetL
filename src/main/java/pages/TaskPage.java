@@ -22,7 +22,6 @@ public class TaskPage extends PageUtility {
 
 	SoftAssert sa;
 	JavascriptExecutor js;
-	// Alert al;
 	@FindBy(linkText = "Tasks")
 	WebElement eTaskHeading;
 	@FindBy(linkText = "New Task")
@@ -67,7 +66,7 @@ public class TaskPage extends PageUtility {
 	WebElement eEdit;
 	@FindBy(xpath = "//button[text()='Updates']")
 	WebElement eUpdates;
-	@FindBy(xpath = "//*[@id=\"task_details\"]/div/div[1]/h3/div[2]/a")
+	@FindBy(xpath = "//a[@data-original-title='Export Report']")
 	WebElement eExport;
 	@FindBy(xpath = "//tr[1]/td[6]/child::a/span")
 	WebElement eViewTask;
@@ -77,7 +76,7 @@ public class TaskPage extends PageUtility {
 	WebElement eCustom;
 	@FindBy(xpath = "//div[@class='checkbox c-checkbox needsclick']//input[@data-parsley-id='14']")
 	WebElement eList;
-	@FindBy(xpath = "//input[@id='select_all']")
+	@FindBy(xpath = "//input[@id='select_all']/following-sibling::*")
 	WebElement eSelectTaskname;
 	@FindBy(xpath = "//a[@class='dt-button btn btn-xs btn-default custom-bulk-button']")
 	WebElement eBulkDelete;
@@ -89,7 +88,18 @@ public class TaskPage extends PageUtility {
 	WebElement eSwitchToKanban;
 	@FindBy(xpath = "//a[@class='btn btn-xs btn-purple pull-right']")
 	WebElement eSwitchToList;
-	
+	@FindBy(xpath = "//h3[text()='faisa                            ']")
+	WebElement eTaskNameVerify;
+	@FindBy(xpath = "//div[@class='toggle-group']/label[1]")
+	WebElement eBillable;
+	@FindBy(xpath = "//a[text()='Tasks']")
+	WebElement eTask;
+	@FindBy(xpath = "//div[@id='toast-container']/div/div[2]")
+	WebElement eBulkDeleteVerify;
+	@FindBy(xpath = "//*[@id=\"table-tasks\"]/tbody/tr[1]/td[6]/a[1]")
+	WebElement eViewEditTask;
+	@FindBy(xpath = "//*[@id=\"task_details\"]/div/div[2]/div[9]/div/p")
+	WebElement eViewEditHourRate;
 	public TaskPage(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -131,7 +141,8 @@ public class TaskPage extends PageUtility {
 	}
 
 	public void hourlyRate(String value) {
-		sendKeys(eHourlyRate, value);
+		waitToClick(eHourlyRate);
+		act.moveToElement(eHourlyRate).click(eHourlyRate).sendKeys(eHourlyRate, value).build().perform();
 	}
 
 	public void taskHour(String value) {
@@ -150,8 +161,9 @@ public class TaskPage extends PageUtility {
 		sendKeys(eTaskDescription, value);
 	}
 
-	public void bilLable() {
-
+	public void billable()
+	{
+		actionClick(eBillable);
 	}
 
 	public void assignTo() {
@@ -211,6 +223,7 @@ public class TaskPage extends PageUtility {
 	}
 
 	public void taskEdit() {
+		waitToClick(eEdit);
 		actionClick(eEdit);
 	}
 
@@ -246,7 +259,9 @@ public class TaskPage extends PageUtility {
 	}
 
 	public void bulkDelete() {
-		actionClick(eBulkDelete);
+		//actionClick(eBulkDelete);
+		waitToClick(eBulkDelete);
+		jsClick(eBulkDelete);
 	}
 
 	public void alertHandle() {
@@ -291,9 +306,47 @@ public class TaskPage extends PageUtility {
 	public void list() {
 		actionClick(eSwitchToList);
 	}
-	public void waitForLong() throws InterruptedException {
+
+	public void taskNameVerify()
+	{
+		String actualText="faisa ";
+		String expectedText="faisa ";
+		sa.assertEquals(actualText, expectedText,"Invalid task name");
+		sa.assertAll();
+	}
+	public void taskLinkClick()
+	{
+		actionClick(eTask);
+	}
+	public void bulkDeleteVerify()
+	{
+		waitToVisible(eBulkDeleteVerify);
+		String actualMsg=eBulkDeleteVerify.getText();
+		String expectedMsg="Task deleted successfully!";
+		sa.assertEquals(actualMsg, expectedMsg);
+		sa.assertAll();
+	}
+	public void windowMaximum() throws InterruptedException
+	{
+		windowMax();
 		waitForLong();
 	}
+	public void viewEditTask()
+	{
+		jsClick(eViewEditTask);
+	}
+	
+	public void hourRateVerify()
+	{
+		waitToVisible(eViewEditHourRate);
+		String actualMsg=eViewEditHourRate.getText();
+		String expectedMsg="8.00";
+		sa.assertEquals(actualMsg, expectedMsg);
+		sa.assertAll();
+	}
+	
+	
+
 	
 
 }

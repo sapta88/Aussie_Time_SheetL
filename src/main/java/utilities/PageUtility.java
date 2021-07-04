@@ -19,6 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -70,7 +71,6 @@ public class PageUtility {
 	public void waitForAlertPresent() {
 		wait.until(ExpectedConditions.alertIsPresent());
 	}
-
 	// *****************************************wait*********************************************
 	public void waitForLong() throws InterruptedException {
 		Thread.sleep(3000);
@@ -122,6 +122,10 @@ public class PageUtility {
 
 	public void scrollDown() {
 		js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+	}
+	//********************************************************Maximize Window*************************************
+	public void windowMax() {
+		driver.manage().window().maximize();
 	}
 
 	// ********************************************************file upload****************************************

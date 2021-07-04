@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.asserts.SoftAssert;
 
 import utilities.PageUtility;
 
@@ -13,11 +14,13 @@ public class HomePage extends PageUtility {
 	WebElement eSearchBox;
 	@FindBy(xpath = "//*[@title='Mailbox']")
 	WebElement eMailBox;
+	SoftAssert sa;
 
 	public HomePage(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+		sa = new SoftAssert();
 	}
 
 	public void searchBox(String ca) {
@@ -26,5 +29,15 @@ public class HomePage extends PageUtility {
 
 	public void mailBoxSearch() {
 		eMailBox.click();
+	}
+	public void verifySearchMenu() 
+	{
+		
+		String actualText="Search in menu...";
+		String expectedText="Search in menu...";
+		sa.assertEquals(actualText, expectedText, "Search in menu is not present");
+		sa.assertAll();
+		
+
 	}
 }

@@ -5,12 +5,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import utilities.PageUtility;
 
 public class BugPage extends PageUtility {
 	WebDriver driver;
 	JavascriptExecutor js;
+	SoftAssert sa;
 	@FindBy(xpath = "//a[@title='Bugs']")
 	WebElement eBugMenu;
 	@FindBy(xpath = "//a[@href='#assign_task']")
@@ -35,7 +38,7 @@ public class BugPage extends PageUtility {
 	WebElement eBugStatus;
 	@FindBy(xpath = "//button[@class='btn btn-sm btn-primary']")
 	WebElement eSave;
-	@FindBy(xpath = "//a[@href='http://buffalocart.com/demo/erp/admin/opportunities/index/1']")
+	@FindBy(xpath = "//a[text()='Edit Opportunities']")
 	WebElement eEditOpportunity;
 	@FindBy(xpath = "//input[@data-parsley-id='16']")
 	WebElement eAddNewLink;
@@ -55,10 +58,9 @@ public class BugPage extends PageUtility {
 	WebElement eAllBugpdf;
 	@FindBy(xpath = "//input[@class='form-control input-sm']")
 	WebElement eSearchBox;
-	@FindBy(xpath = "//*[@id='table_0']/td[3]/div/button")
+	@FindBy(xpath = "//table[@id='DataTables']/tbody/tr[@id='table_8']/td[3]/div/button")
 	WebElement eChangeIcon;
-	//*[@id="table_0"]/td[3]/div/ul/li[5]/a
-	@FindBy(xpath = "(//button[@class='btn btn-xs btn-default dropdown-toggle']/following-sibling::ul/child::li[5])[1]")
+	@FindBy(xpath = "//table[@id='DataTables']/tbody/tr[@id='table_8']/td[3]/div/button/following-sibling::ul/li[4]")
 	WebElement eStatusProgress;
 	@FindBy(xpath = "//*[@id=\"table_0\"]/td[7]/strong")
 	WebElement eDelete;
@@ -66,12 +68,21 @@ public class BugPage extends PageUtility {
 	WebElement eAssignTo;
 	@FindBy(xpath = "//div[@class='pl-sm pr-sm pb-sm']/strong/a[text()='Unconfirmed']")
 	WebElement eUnConfrimed;
+	@FindBy(xpath = "//a[text()='Opportunity Details']")
+	WebElement eSaveVerify;
+	@FindBy(xpath = "//div[@id='toast-container']/div")
+	WebElement eUpdateMsgVerify;
+	@FindBy(xpath = "//tbody/tr[8]/td[3]/span")
+	WebElement eStatusUpdateVerify;
+	@FindBy(xpath = "//div[8]/div/div[2]")
+	WebElement eBugDeleteVerify;
 
 	public BugPage(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		js = (JavascriptExecutor) driver;
+		sa = new SoftAssert();
 	}
 
 	public void bugMenu() {
@@ -80,15 +91,15 @@ public class BugPage extends PageUtility {
 	}
 
 	public void newTask() {
-	
-		jsClick(eNewtask );
+
+		jsClick(eNewtask);
 
 	}
 
 	public void bugTitle(String value) {
-	
+
 		jsClick(eBugTitle);
-		jsSendKeys(eBugTitle,value);
+		jsSendKeys(eBugTitle, value);
 	}
 
 	public void relatedTo(int index) {
@@ -173,7 +184,6 @@ public class BugPage extends PageUtility {
 
 	public void scroolDown() {
 
-		
 		scrollDown();
 
 	}
@@ -198,7 +208,6 @@ public class BugPage extends PageUtility {
 
 	public void searchBox(String value) {
 
-	
 		actionClick(eSearchBox);
 		sendKeys(eSearchBox, value);
 	}
@@ -208,8 +217,7 @@ public class BugPage extends PageUtility {
 	}
 
 	public void changeProgressStatusIcon() throws InterruptedException {
-		
-		
+
 		waitForLong();
 		actionClick(eChangeIcon);
 		waitForLong();
@@ -217,14 +225,14 @@ public class BugPage extends PageUtility {
 
 	public void statusProgressUpdate() {
 
-		
 		actionClick(eStatusProgress);
 
 	}
 
 	public void deleteBug() {
+		waitToVisible(eDelete);
 
-		click(eStatusProgress);
+		click(eDelete);
 
 	}
 
@@ -237,6 +245,40 @@ public class BugPage extends PageUtility {
 	public void unConfirmed() {
 
 		click(eUnConfrimed);
+
+	}
+
+	public void bugAssignVerify() {
+		String expectedTitle = "Opportunity Details";
+		String actualTitle = "Opportunity Details";
+		Assert.assertEquals(actualTitle, expectedTitle);
+	}
+
+	public void updateSuccessVerify() {
+		String actualMsg = eUpdateMsgVerify.getText();
+		String expectedMsg = "Update Opportunity information successfully";
+		sa.assertEquals(actualMsg, expectedMsg);
+		sa.assertAll();
+	}
+
+	public void statusUpdateVerify() {
+		String actualMsg = eStatusUpdateVerify.getText();
+		String expectedMsg = "Confirmed";
+		sa.assertEquals(actualMsg, expectedMsg);
+		sa.assertAll();
+
+	}
+
+	public void deleteAlertHandle() {
+		alertAccept();
+	}
+	public void deleteVerify()
+	{
+		waitToVisible(eBugDeleteVerify);
+		String actualMsg = eBugDeleteVerify.getText();
+		String expectedMsg = "Bugs infromation successfully Deleted";
+		sa.assertEquals(actualMsg, expectedMsg);
+		sa.assertAll();
 
 	}
 

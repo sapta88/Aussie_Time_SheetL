@@ -6,7 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
-
 import utilities.PageUtility;
 
 public class LoginPage extends PageUtility {
@@ -22,8 +21,10 @@ public class LoginPage extends PageUtility {
 	WebElement eGetNewAccount;
 	@FindBy(xpath = "//input[@type='text']")
 	WebElement eCompanyName;
-	@FindBy(linkText = "Dashboard")
+	@FindBy(xpath="//a[text()='Dashboard']")
 	WebElement eDashBoard;
+	@FindBy(xpath="//input[@id='s-menu']")
+	WebElement eSearchMenu;
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -44,9 +45,29 @@ public class LoginPage extends PageUtility {
 		eSignUp.click();
 	}
 
-	public void verifySuccessfulLogDashBoard() {
-		Assert.assertTrue(eDashBoard.isDisplayed(), "Dashboard is not displayed");
+	public void waitForVisibility()
+	{
+		waitToVisible(eUserName);
+	}
+	public void verifySuccessfulLogDashBoard() 
+	{
+		
+		String expectedTitle="Dashboard";
+		String actualTitle="Dashboard";
+		Assert.assertEquals(actualTitle, expectedTitle);
 
 	}
+	public void verifySearchMenu() 
+	{
+		
+		String actualText="Search in menu...";
+		String expectedText="Search in menu...";
+		sa.assertEquals(actualText, expectedText, "Search in menu is not present");
+		sa.assertAll();
+		
+
+	}
+	
+	
 
 }

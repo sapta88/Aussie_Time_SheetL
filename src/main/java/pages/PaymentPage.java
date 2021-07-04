@@ -13,6 +13,8 @@ public class PaymentPage extends PageUtility {
 	SoftAssert sa;
 	@FindBy(xpath = "//a[text()='Payments Received']")
 	WebElement ePaymentRecieveText;
+	@FindBy(xpath = "//a[text()='Payments Received']")
+	WebElement ePaymentReceivedPageVerification;
 
 	public PaymentPage(WebDriver driver) {
 		super(driver);
@@ -28,6 +30,13 @@ public class PaymentPage extends PageUtility {
 		sa.assertEquals(actualTitle, expectedTitle);
 		sa.assertAll();
 
+	}
+	public void paymentPageVerification()
+	{
+		String expectedTitle = "Payments Received";
+		String actualTitle = ePaymentReceivedPageVerification.getText();
+		sa.assertEquals(actualTitle, expectedTitle);
+		sa.assertAll();
 	}
 
 }

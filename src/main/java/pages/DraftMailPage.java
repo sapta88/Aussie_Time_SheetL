@@ -14,12 +14,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import utilities.PageUtility;
 
 public class DraftMailPage extends PageUtility {
 	JavascriptExecutor js;
 	WebDriver driver;
+	SoftAssert sa;
+	@FindBy(xpath = "//a[text()='Mailbox']")
+	WebElement eMailBoxV;
 	@FindBy(xpath = "//*[@class='btn btn-danger btn-xs mr-sm']")
 	WebElement eCompose;
 	@FindBy(xpath = "//input[@class='select2-search__field']")
@@ -32,10 +37,10 @@ public class DraftMailPage extends PageUtility {
 	WebElement eMesgBody;
 	@FindBy(xpath = "//button[@name='draf']")
 	WebElement eDraft;
-	@FindBy(xpath = "//a[@href='http://buffalocart.com/demo/erp/admin/mailbox/index/draft']")
+	@FindBy(xpath = "//a[@href='https://erp.buffalocart.com/admin/mailbox/index/draft']")
 	WebElement eDrafts;
 	@FindBy(linkText = "Are we able to draft the compose mail")
-	WebElement eDraftLinkText;
+	WebElement eDraftSubText;
 	@FindBy(xpath = "//a[@href='#attendance']")
 	WebElement From;
 	@FindBy(xpath = "//div[@class='dz-default dz-message']//strong")
@@ -44,11 +49,15 @@ public class DraftMailPage extends PageUtility {
 	WebElement eAttachFile;
 	@FindBy(xpath = "//button[@type='submit']/i")
 	WebElement eSend;
+	@FindBy(xpath = "//div[8]/div/div[2]")
+	WebElement eSendSuccessMsg;
+	
 
 	public DraftMailPage(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+		sa=new SoftAssert();
 	}
 
 	public void draftMail() {
@@ -88,36 +97,24 @@ public class DraftMailPage extends PageUtility {
 		eDrafts.click();
 	}
 
-	public void darftVerify() {
-		eDraftLinkText.click();
+	public void darftSubText() {
+		eDraftSubText.click();
 	}
 
 	public void fileAttachmt() throws AWTException, InterruptedException {
 		Actions act = new Actions(driver);
 		act.moveToElement(eAttachFile).click(eAttachFile).build().perform();
-		waitForLong();
+	}
+	public void fileUpload() throws AWTException
+	{
 		fileUploading("C:\\Users\\sapta\\OneDrive\\Desktop\\TestcaseCurrentStatus.xlsx");
-		waitForLong();
 	}
+	
 
-	public void fileUploading(String path) throws AWTException {
-		StringSelection strSelection = new StringSelection(path);
-		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-		clipboard.setContents(strSelection, null);
-		Robot robot = new Robot();
-		robot.delay(400);
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		robot.keyRelease(KeyEvent.VK_V);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.delay(400);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-
-	}
 
 	public void sendfutn() {
-		click(eSend);
+		Actions act = new Actions(driver);
+		act.moveToElement(eSend).click(eSend).build().perform();
 	}
 	public void waitForFileAttach()
 	{
@@ -125,10 +122,44 @@ public class DraftMailPage extends PageUtility {
 	}
 	public void waitForDraftToClick()
 	{
-		waitToClick(eDrafts) ;
+		waitToVisible(eDrafts) ;
 	}
-	public void waitForLong() throws InterruptedException {
+	public void waitFor() throws InterruptedException {
 		waitForLong();
+	}
+	public void verifyMailBoxPage()
+	{
+		String actualText="Mailbox";
+		String expectedText="Mailbox";
+		sa.assertEquals(actualText, expectedText,"Main text us not present");
+		sa.assertAll();
+	}
+	public void verifyDraftMail()
+	{
+		String actualText="Are we able to draft the compose mail";
+		String expectedText="Are we able to draft the compose mail";
+		sa.assertEquals(actualText, expectedText,"Draft mail is  not present");
+		sa.assertAll();
+	}
+	public void scrool()
+	{
+		scrollDown(eAttachFile);
+	}
+	public void waitToClickSend()
+	{
+		waitToClick(eSend);
+	}
+	public void verifyMailSendNotification()
+	{
+		String actualMsg=eSendSuccessMsg.getText();
+		String expectedMsg="Your message has been sent.!";
+		sa.assertEquals(actualMsg, expectedMsg, "No validation message is displayed");
+		
+		
+	}
+	public void waitToBeVisible()
+	{
+		waitToVisible(eSendSuccessMsg);
 	}
 	
 

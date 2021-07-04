@@ -50,7 +50,7 @@ public class TestHelper
 	  public void beforeClass() 
 	  {
 		  System.setProperty("webdriver.chrome.driver",
-					"C:\\Users\\sapta\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
+					"C:\\Users\\sapta\\eclipse-workspace\\AussieTimeSheet\\drivers\\chromedriver.exe");
 		  driver=new ChromeDriver();
 		  driver.get("http://buffalocart.com/demo/erp/login");
 		  objLogPage=new LoginPage(driver);
@@ -70,14 +70,14 @@ public class TestHelper
 	  @AfterClass
 	  public void afterClass() 
 	  {
-		  driver.quit();
+		  //driver.quit();
 	  }
 	  
 //*****************************************************DataProvider **********************************
 	  @DataProvider(name = "ReadFromExcel")
 		public Object[][] readData() throws IOException {
 			FileInputStream fls = new FileInputStream(
-					"C:\\Users\\sapta\\eclipse-workspace\\AussieTimeSheet\\TestData.xlsx");
+					"C:\\Users\\sapta\\git\\Aussie_Time_SheetL\\src\\test\\resources\\TestData.xlsx");
 			XSSFWorkbook book = new XSSFWorkbook(fls);
 			XSSFSheet sheet = book.getSheet("Sheet2");
 			XSSFRow row = sheet.getRow(0);

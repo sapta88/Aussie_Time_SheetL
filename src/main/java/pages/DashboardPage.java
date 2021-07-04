@@ -14,7 +14,7 @@ public class DashboardPage extends PageUtility {
 	WebDriver driver;
 	SoftAssert sa;
 	JavascriptExecutor js;
-	@FindBy(xpath = "//a[@title][@href='http://buffalocart.com/demo/erp/admin/dashboard']")
+	@FindBy(xpath = "//a[text()='Dashboard']")
 	WebElement eDashBoard;
 	@FindBy(linkText = "Dashboard")
 	WebElement eDashText;
@@ -28,9 +28,9 @@ public class DashboardPage extends PageUtility {
 	WebElement eView;
 	@FindBy(xpath = "//*[@id=\"task_details\"]/div/div[2]/div[1]/div[2]/div/button")
 	WebElement eStatusChangeBtn;
-	@FindBy(xpath = "//*[@id=\"task_details\"]/div/div[2]/div[1]/div[2]/div/button/following-sibling::ul/li[5]")
+	@FindBy(xpath = "//*[@id=\"task_details\"]/div/div[2]/div[1]/div[2]/div/button/following-sibling::ul/li[2]")
 	WebElement eStatusUpdated;
-	@FindBy(xpath = "//a[@href='http://buffalocart.com/demo/erp/admin/dashboard/new_todo']")
+	@FindBy(xpath = "//a[text()='Add new']")
 	WebElement eAddNew;
 	@FindBy(xpath = "//textarea[@data-parsley-id='6']")
 	WebElement eWhatToDo;
@@ -48,6 +48,16 @@ public class DashboardPage extends PageUtility {
 	WebElement eViewDetails;
 	@FindBy(xpath = "//button[text()='Close']")
 	WebElement eClose;
+	@FindBy(xpath = "//div[@class='panel-heading']/button/following-sibling::*")
+	WebElement eAnnounceDetailsVerify;
+	@FindBy(xpath = "//div[@class='panel-heading']/h3[text()='Task Name Upload1                            ']")
+	WebElement eTaskNameVerify;
+	@FindBy(xpath="//body/div[8]/div")
+	WebElement eTaskValidationMsgVerify;
+	@FindBy(xpath="//div[8]/div")
+	WebElement eAddNewValidationMsgVerify;
+	@FindBy(xpath="//th[@class='col-xs-2 sorting']")
+	WebElement eActivitiesViewVerify;
 	public DashboardPage(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -57,6 +67,7 @@ public class DashboardPage extends PageUtility {
 	}
 
 	public void dashBoardClick() {
+		waitToVisible(eDashBoard);
 		click(eDashBoard);
 
 	}
@@ -73,6 +84,7 @@ public class DashboardPage extends PageUtility {
 		click(eMoreInfoLink);
 
 	}
+	
 
 	public void progressTaskMoreInfo() {
 		click(eMoreInfoLinkPT);
@@ -96,18 +108,21 @@ public class DashboardPage extends PageUtility {
 
 	}
 
-	public void statusUpdate() {
+	public void statusUpdate() throws InterruptedException {
+		waitForLong();
 		click(eStatusUpdated);
 
 	}
 
 	public void scrollDown() {
-		
+		waitToVisible(eAddNew);
 		scrollDown(eAddNew);
 	}
 
 	public void addNew() {
-		click(eAddNew);
+		//waitToVisible(eAddNew);
+		//click(eAddNew);
+		js.executeScript("arguments[0].click();", eAddNew);
 
 	}
 
@@ -145,14 +160,54 @@ public class DashboardPage extends PageUtility {
 
 	}
 	public void viewDetails() {
+		waitToVisible(eViewDetails);
 		click(eViewDetails);
 
 	}
 	public void closeButton() {
-		click(eClose);
+		
+		waitToVisible(eClose );
+		js.executeScript("arguments[0].click();",eClose);
 
 	}
+	public void announcementDetailsVerify()
+	{
+		
+		String actualText="Announcements Details";
+		String expectedText="Announcements Details";
+		sa.assertEquals(actualText, expectedText,"Announcements Details page is  not present");
+		sa.assertAll();
+	}
 	
+	public void tasksNameVerify()
+	{
+		
+		String actualText="Task Name Upload1";
+		String expectedText="Task Name Upload1";
+		sa.assertEquals(actualText, expectedText,"Announcements Details page is  not present");
+		sa.assertAll();
+	}
+	public void validationMessageVerify()
+	{
+		String actualMsg=eTaskValidationMsgVerify.getText();
+		String expectedMsg="Change Status";
+		sa.assertEquals(actualMsg, expectedMsg);
+		sa.assertAll();
+	}
+	public void addNewvalidationMessageVerify()
+	{
+		String actualMsg=eAddNewValidationMsgVerify.getText();
+		String expectedMsg="Todo information successfully updated";
+		sa.assertEquals(actualMsg, expectedMsg);
+		sa.assertAll();
+	}
+	public void activitiesViewVerify()
+	{
+		String actualMsg=eActivitiesViewVerify.getText();
+		String expectedMsg="Activity Date";
+		sa.assertEquals(actualMsg, expectedMsg);
+		sa.assertAll();
+	}
 	
 
 }
